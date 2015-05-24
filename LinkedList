@@ -1,0 +1,162 @@
+class Node{
+    Object data;
+    Node next;
+    public Node(Object value)
+    {
+        data =value;
+        next=null;
+    }
+    
+    public void setData(Object datavalue)
+    {
+        data=datavalue;
+    }
+    
+    public void setNext(Node nextvalue)
+    {
+        next=nextvalue;
+    }
+    
+    public Object getData()
+    {
+        return data;
+    }
+    
+     public Node getNext()
+    {
+        return next;
+    }
+    
+}
+
+class LinkedList{
+  Node head;
+  private int count;
+ public LinkedList()
+  {
+      head=new Node(null);
+      count=0;
+  }
+  
+  public void add(int datavalue)
+    {
+        Node n=new Node(datavalue);
+        Node current =head;
+        while(current.getNext()!=null)
+        {
+            current=current.getNext();
+        }
+        current.setNext(n);
+        count++;
+    }
+    
+    public int size()
+    {
+        return count;
+    }
+    
+    public void printNodes()
+    { Node e=head; 
+        while(e.getNext()!=null)
+        { 
+            e=e.getNext();
+            System.out.println(e.getData());
+        }
+        
+    }
+
+    public void get(int index){
+        Node current=head;
+        current=current.getNext();
+        for(int i=0;i<index;i++)
+        current=current.getNext();
+        System.out.println(current.getData());
+    }
+    
+    public void add(int index, Object datavalue)
+    {
+        Node n=new Node(datavalue);
+        Node current =head;
+        Node temp;
+        
+        for(int i=0;i<index;i++)
+        current=current.getNext();
+        temp=current.getNext();
+        current.setNext(n);
+        n.setNext(temp);
+        count++;
+    }
+    
+     public void remove(int index){
+        Node current=head;
+        for(int i=0;i<(index);i++)
+        current=current.getNext();
+        Node current1=current.getNext();
+        Node current2=current1.getNext();
+        current.setNext(current2);
+    }
+     public boolean search(Object index){
+         Node current=head;
+         while(current.getNext()!=null)
+        {
+            current=current.getNext();
+            if(current.getData()==index)
+            return true;
+        }
+        return false;
+     }
+     
+     public void printMiddle()
+     {Node current1=head;
+        Node current2=head;
+        while(current1.getNext()!=null && current2.getNext()!=null)
+       {current1=current1.getNext();
+       current2=current2.getNext().getNext();
+       }
+       System.out.println("Middle element"+current1.getData());
+     }
+}  
+
+public class HelloWorld{
+
+     public static void main(String []args){
+       LinkedList list=new LinkedList();
+       list.add(1);
+       list.add(2);
+       list.add(3);
+       list.add(4);
+       list.add(5);
+       System.out.println("Size of LinkedList is:"+list.size());
+       System.out.println("Nodes of LinkedList are as follows:");
+       list.printNodes();
+       System.out.println("Element at index 3 is:");
+       list.get(3);
+       System.out.println("Let's add an element valued 6 at index 1");
+       list.add(1,6);
+       System.out.println("Let's add an element valued 9 in the beginning");
+       list.add(0,9);
+       System.out.println("Size of LinkedList is:"+list.size());
+       System.out.println("Nodes of LinkedList are as follows:");
+       list.printNodes();
+       System.out.println("Let's remove the element at index 4");
+       list.remove(4);
+        System.out.println("Let's remove the element at index 0");
+       list.remove(0);
+       System.out.println("New Nodes of LinkedList are as follows:");
+       list.printNodes();
+       System.out.println("Does 2 exist in our LinkedList?? true/false");
+       int i=2;
+       Object d=(Object)i;
+       boolean b=list.search(2);
+       System.out.println(b);
+       System.out.println("Let's add an element valued 8 in the beginning");
+       list.add(0,8);
+       System.out.println("New Nodes of LinkedList are as follows:");
+       list.printNodes();
+       System.out.println("Let's print the middle of linked list");
+       list.printMiddle();
+       System.out.println("Let's print the 3rd node from the end of linked list"); 
+       
+         
+     }
+}
