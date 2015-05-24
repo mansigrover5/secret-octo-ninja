@@ -115,6 +115,21 @@ class LinkedList{
        }
        System.out.println("Middle element"+current1.getData());
      }
+     
+     public void nodeFromLast(int index)
+     {
+         Node current1=head;
+         Node current2=head;
+         for(int i=0;i<(index-1);i++)
+         current2=current2.getNext();
+         while(current2.getNext()!=null)
+         {
+             current2=current
+2.getNext();
+             current1=current1.getNext();
+         }
+         System.out.println(current1.getData());
+     }
 }  
 
 public class HelloWorld{
@@ -155,8 +170,9 @@ public class HelloWorld{
        list.printNodes();
        System.out.println("Let's print the middle of linked list");
        list.printMiddle();
-       System.out.println("Let's print the 3rd node from the end of linked list"); 
-       
-         
+       System.out.println("Let's print the 3rd node from the end of linked list: "); 
+       list.nodeFromLast(3);
      }
 }
+
+
