@@ -1,3 +1,11 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+
+
 class Node{
     Object data;
     Node next;
@@ -37,7 +45,56 @@ class LinkedList{
       head=new Node(null);
       count=0;
   }
-  
+  //count the number of times an integer exists in a llist
+public void count(int value)
+{ int listcount=0;
+  Node current=head;
+  while(current.getNext()!=null)
+  {
+   current=current.getNext();
+   int p=(int)current.getData();
+   if(p==value)
+    listcount++;
+  }
+  System.out.println(listcount);
+}
+
+public void reverse()
+{
+
+Node current=head.getNext().getNext(); 
+Node prev=head.getNext(); 
+Node next; Node c=prev;
+int u=size();
+ for(int o=1;o<u;o++)
+ { next=current.getNext();
+   current.setNext(prev);
+     if(o==1)
+   prev.setNext(null);
+   prev=current;
+   current=next;
+ }
+head.setNext(prev);
+
+}
+
+
+//detect a loop in linked list
+
+public boolean detectLoop()
+{
+	
+ Node n1=head;
+ Node n2=head; 
+ while(n2.getNext()!=null)
+ { 
+   n1=n1.getNext(); 
+   n2=n2.getNext().getNext(); 
+   if(n1.getData()==n2.getData()) { System.out.println("Loop hai beta"); return true;}
+ }
+return false;
+}
+
   public void add(int datavalue)
     {
         Node n=new Node(datavalue);
@@ -94,6 +151,7 @@ class LinkedList{
         Node current1=current.getNext();
         Node current2=current1.getNext();
         current.setNext(current2);
+        count--;
     }
      public boolean search(Object index){
          Node current=head;
@@ -105,7 +163,27 @@ class LinkedList{
         }
         return false;
      }
-     
+ 
+/* public void insertInSortedManner(int i)
+{
+//createnode(i)
+
+current=head.getNext();
+Node x;
+ while(current.getNext()!=null)
+ {
+  x=current;
+  if(i>current.getData())
+  current=current.getNext();
+  else
+{
+  x.setNext(node);
+  node.setNext(current);
+  return 0;
+ }
+}}
+*/
+
      public void printMiddle()
      {Node current1=head;
         Node current2=head;
@@ -115,64 +193,50 @@ class LinkedList{
        }
        System.out.println("Middle element"+current1.getData());
      }
-     
-     public void nodeFromLast(int index)
-     {
-         Node current1=head;
-         Node current2=head;
-         for(int i=0;i<(index-1);i++)
-         current2=current2.getNext();
-         while(current2.getNext()!=null)
-         {
-             current2=current
-2.getNext();
-             current1=current1.getNext();
-         }
-         System.out.println(current1.getData());
-     }
 }  
 
-public class HelloWorld{
-
-     public static void main(String []args){
-       LinkedList list=new LinkedList();
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		  LinkedList list=new LinkedList();
        list.add(1);
        list.add(2);
        list.add(3);
        list.add(4);
        list.add(5);
-       System.out.println("Size of LinkedList is:"+list.size());
-       System.out.println("Nodes of LinkedList are as follows:");
-       list.printNodes();
-       System.out.println("Element at index 3 is:");
-       list.get(3);
-       System.out.println("Let's add an element valued 6 at index 1");
-       list.add(1,6);
+       //System.out.println("Size of LinkedList is:"+list.size());
+      // System.out.println("Nodes of LinkedList are as follows:");
+       //list.printNodes();
+      //System.out.println("Element at index 3 is:");
+      //list.get(3);
+      
+      // System.out.println("Let's add an element valued 6 at index 1");
+       //list.add(1,6);
        System.out.println("Let's add an element valued 9 in the beginning");
        list.add(0,9);
-       System.out.println("Size of LinkedList is:"+list.size());
-       System.out.println("Nodes of LinkedList are as follows:");
-       list.printNodes();
-       System.out.println("Let's remove the element at index 4");
+       //System.out.println("Size of LinkedList is:"+list.size());
+       //System.out.println("Nodes of LinkedList are as follows:");
+       //list.printNodes();
+       //System.out.println("Let's remove the element at index 4");
        list.remove(4);
-        System.out.println("Let's remove the element at index 0");
+        //System.out.println("Let's remove the element at index 0");
        list.remove(0);
-       System.out.println("New Nodes of LinkedList are as follows:");
-       list.printNodes();
-       System.out.println("Does 2 exist in our LinkedList?? true/false");
-       int i=2;
-       Object d=(Object)i;
-       boolean b=list.search(2);
-       System.out.println(b);
-       System.out.println("Let's add an element valued 8 in the beginning");
-       list.add(0,8);
-       System.out.println("New Nodes of LinkedList are as follows:");
-       list.printNodes();
-       System.out.println("Let's print the middle of linked list");
-       list.printMiddle();
-       System.out.println("Let's print the 3rd node from the end of linked list: "); 
-       list.nodeFromLast(3);
-     }
+       list.add(2);
+       list.add(4);
+       //System.out.println("Does 2 exist in our LinkedList?? true/false");
+       //int i=2;
+       //Object d=(Object)i;
+       //boolean b=list.search(2);
+       //System.out.println(b);
+       //System.out.println("New Nodes of LinkedList are as follows:");
+       //list.printNodes();
+       System.out.println("Reverse the linked list. New lList is:");
+       list.reverse();
+       list.printNodes();  
+       boolean h=list.detectLoop();
+       System.out.println("Loop? --"+h);
+	}
 }
-
-
