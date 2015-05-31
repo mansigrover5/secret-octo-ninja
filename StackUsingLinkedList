@@ -1,0 +1,88 @@
+//*******************************************************************
+// Java compiler created in PHP to quickly and safely test code.
+// NOTE: please read the 'More Info' tab to the right for shortcuts.
+//*******************************************************************
+
+import java.lang.Math; // header stuff MUST go above the first class
+
+// our main class becomes a file but the main method is still found
+class Node{
+ Object data;
+  Node next;
+  Node(Object d){
+  data=d;
+    next=null;
+  }
+  public Object getData()
+  { 
+    return data;
+  }
+  public void setData(Object value)
+  { 
+    data=value;
+  }
+  
+  public Node getNext()
+  { 
+    return next;
+  }
+  public void setNext(Node n)
+  { 
+    next=n;
+  }
+  
+}
+
+class Stack{
+    Node head;
+  int count=0;
+  Stack(){
+  head=new Node(null);
+  }
+    
+    public void push(int index){
+      Node prev=head;
+      Object x=(Object)index;
+      Node n=new Node(x);
+      while(prev.getNext()!=null)
+        prev=prev.getNext();
+      prev.setNext(n);
+      count++;
+    }
+    
+    public void pop(){
+       Node prev=head;
+      if(count==0)
+        System.out.println("Stack underflow");
+        else{
+      for(int i=0;i<(count-1);i++)
+       prev=prev.getNext();
+       System.out.println("Popping element with value:"+prev.getNext().getData());
+      prev.setNext(null);      
+      count--;
+      }
+    }
+    
+    public void printElements(){
+        System.out.println("Elements in Stack:");
+      Node prev=head;
+         for(int i=0;i<count;i++)
+         {   
+           prev=prev.getNext();
+        System.out.println(prev.getData());
+          }
+        }
+
+}
+public class HelloWorld{
+
+     public static void main(String []args){
+       Stack s=new Stack();
+       s.pop();
+       s.push(6);
+       s.push(7);
+       s.push(8);
+       s.pop();
+       s.printElements();
+     }
+}
