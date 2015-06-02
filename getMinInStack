@@ -1,0 +1,48 @@
+import java.util.Stack; 
+
+class MyStack{ 
+public Stack<Integer> basic; 
+public Stack<Integer> hold_min; 
+public MyStack(){ 
+this.basic=new Stack<Integer>(); 
+this.hold_min=new Stack<Integer>(); 
+} 
+public void push(int newItem){ 
+if(newItem<=this.getmin()){ 
+this.hold_min.push(newItem); 
+} 
+this.basic.push(newItem);	
+} 
+public int pop(){ 
+if(this.basic.isEmpty()){ 
+return Integer.MIN_VALUE; 
+} 
+int value=this.basic.pop(); 
+if(value==this.getmin()){ 
+this.hold_min.pop(); 
+} 
+return value; 
+} 
+public int getmin(){ 
+if(this.hold_min.isEmpty()){ 
+return Integer.MAX_VALUE; 
+} 
+else{ 
+return this.hold_min.peek(); 
+} 
+} 
+} 
+
+public class pop_push_min_in_stack{ 
+
+
+public static void main(String[] args) { 
+MyStack test=new MyStack(); 
+test.push(6); 
+test.push(3); 
+test.push(7); 
+System.out.println(test.getmin()); 
+System.out.println(test.pop()); 
+} 
+
+}
