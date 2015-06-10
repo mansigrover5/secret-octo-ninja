@@ -1,0 +1,71 @@
+package accolite;
+
+public class ThreadTest {
+	public static void main(String args[]){
+		Q q=new Q();
+	 Runnable runn=new Thread1(q);
+	 Thread t1=new Thread(runn);
+	 Runnable runn2=new Thread2(q);
+	 Thread t2=new Thread(runn2);
+	 t1.start();
+	 t2.start();
+	 
+	}
+}
+
+class Q{
+	volatile boolean valueTest=false;
+	int i=1;
+	synchronized void printEven(){
+		System.out.println("Entered Thread2");
+		while(!valueTest){
+			try{System.out.println("Thread2 waiting");
+				wait();
+				}
+				catch(InterruptedException iex){
+					iex.printStackTrace();
+					}
+		}
+		System.out.println(i);
+		i++;
+	valueTest=false;
+	notify();
+	}
+	synchronized void printOdd(){
+		System.out.println("Entered Thread1");
+		while(valueTest){
+			try{
+			wait();
+			}
+			catch(InterruptedException iex){
+				iex.printStackTrace();
+				}
+		}
+		System.out.println(i);
+		i++;
+		valueTest=true;	
+	    notify();
+	}
+}
+class Thread1 implements Runnable{
+    Q q;
+	Thread1(Q q){
+	this.q=q;
+	}
+	public void run(){
+		while(true){
+			q.printOdd();
+		}
+	}
+}
+
+class Thread2 implements Runnable{
+	Q q;
+	Thread2(Q q){
+	this.q=q;
+	}
+	public void run(){
+		while(true){
+			q.printEven();
+		}
+}}
